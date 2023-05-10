@@ -1,7 +1,7 @@
 import { StyleSheet } from "react-native";
 import { COLORS } from "../../contants/contants";
 
-export const style = StyleSheet.create({
+export const LoginStyle = StyleSheet.create({
         container:{
             
         },
