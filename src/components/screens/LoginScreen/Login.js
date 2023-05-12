@@ -1,6 +1,7 @@
 import { Text,
          View,
          TextInput,
+         StatusBar,
 } from "react-native"
 
 import { style } from "./style"
@@ -37,6 +38,7 @@ export function Login(){
                     <Text style={style.signUp}>SignUp</Text>
                 </View>
             </View>
+            <StatusBar style="auto"/>
         </View>
     )
 }
