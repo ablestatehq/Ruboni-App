@@ -1,0 +1,7 @@
+export { default as Login } from './LoginScreen/Login'
+export { default as SignUp } from './SignUpScreen/SignUp'
+export { default as Dashboard } from './Dashboard/Dashboard'
+export { default as Profile } from './Account/Profile'
+export { default as Accommodation } from './Accommodations/AccView'
+export { default as ListAccommodation } from './Accommodations/List_of_accommodations'
+export { default as Payment } from './Payment/Pay'
