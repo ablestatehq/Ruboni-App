@@ -1,3 +1,5 @@
+import { Dimensions } from "react-native"
+
 export const COLORS = {
     PRIMARY:'#82AAE3',
     PRIMARY_1:'#BFEAF5',
@@ -10,7 +12,9 @@ export const COLORS = {
 export const DIMENS = {
     FORM: {
         PADDING: 20,
-    }
+    },
+    SCREENHEIGHT: Dimensions.get('screen').height,
+    SCREENWIDTH: Dimensions.get('screen').width,
 }
 
 export const FONTS = {
