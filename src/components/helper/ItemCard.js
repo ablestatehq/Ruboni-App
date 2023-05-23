@@ -1,11 +1,13 @@
-import {Image, Text, View} from 'react-native';
+import {Image, Text, TouchableOpacity, View} from 'react-native';
 import Btn from './Btn';
 
 function ItemCard(props){
     // const url = props.image;
     return (
         <View style={props.itemCard}>
-            <Image source={require('../../../assets/Bodaboda-safari.jpg')} style={props.imgStyle}/>
+            <TouchableOpacity onPress={props.touchImage} style={props.touchStyle}>
+                <Image source={{uri: props.url}} style={props.imgStyle}/>
+            </TouchableOpacity>
             <Text style={props.itemDes}>{
                 props.description.length > 10 ? props.description.slice(10) + '...': props.description
             }</Text>
