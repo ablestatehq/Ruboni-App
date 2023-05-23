@@ -1,7 +1,9 @@
-import { ScrollView, StatusBar, TextInput, View } from "react-native";
+import { FlatList, StatusBar, Text, TextInput, View } from "react-native";
 import { DashboardStyle } from "./style";
 import { Ionicons } from "@expo/vector-icons";
 import { COLORS } from "../../contants/contants";
+import { tours } from "../../../dataTours/tours";
+import ItemCard from "../../helper/ItemCard";
 
 function Dashboard() {
     return ( 
@@ -12,19 +14,53 @@ function Dashboard() {
                 <Ionicons name="search-outline" size={20} color={COLORS.PRIMARY} onPress={() => alert("Search now")}/>
             </View>
             <View style={DashboardStyle.sourvenirsView}>
-                <ScrollView horizontal>
-
-                </ScrollView>
+                {/* <ScrollView horizontal>
+                </ScrollView> */}
             </View>
+            <Text>Rooms/Hotels</Text>
             <View style={DashboardStyle.accomView}>
-                <ScrollView horizontal>
-                
-                </ScrollView>
+                {/* <ScrollView horizontal>
+                </ScrollView> */}
+                <FlatList
+                    style={DashboardStyle.flatList}
+                    data={tours}
+                    renderItem={({item}) => 
+                                    <ItemCard 
+                                    itemCard={DashboardStyle.cardView}
+                                    url={item.image}
+                                    {...console.log(item.image)}
+                                    imgStyle={DashboardStyle.cardImgView}
+                                    itemDes={DashboardStyle.desStyle}
+                                    description={item.description}
+                                    itemFooter={DashboardStyle.cardFooter}
+                                    itemF={DashboardStyle.text}
+                                    price={item.price}
+                                    touchImage={() => alert(`Okay, ${item.Title}`)}
+                                    touchStyle={DashboardStyle.touch}/>
+                                }
+                    horizontal
+                    showsHorizontalScrollIndicator={false}/>
             </View>
+            <Text>Recommanded Safaris</Text>
             <View style={DashboardStyle.hotelsView}>
-                <ScrollView horizontal>
-                    
-                </ScrollView>
+                {/* <ScrollView horizontal>
+                </ScrollView> */}
+                <FlatList
+                    style={DashboardStyle.sourvenirsView}
+                    data={tours}
+                    renderItem={({item}) => 
+                                    <ItemCard 
+                                    itemCard={DashboardStyle.cardView}
+                                    image={item.image}
+                                    imgStyle={DashboardStyle.cardImgView}
+                                    itemDes={DashboardStyle.desStyle}
+                                    description={item.description}
+                                    itemFooter={DashboardStyle.cardFooter}
+                                    itemF={DashboardStyle.text}
+                                    price={item.price}/>
+                                }
+                    horizontal
+                    showsHorizontalScrollIndicator={false}/>
             </View>
             <StatusBar style="auto" />
         </View>
