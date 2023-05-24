@@ -23,22 +23,33 @@ export const DashboardStyle = StyleSheet.create({
     sourvenirsView:{
         backgroundColor: COLORS.WHITE,
         width: "100%",
-        height: "20%",
-        borderWidth: 1,
+        height: "10%",
+        // borderWidth: 1,
         marginBottom: 10,
     },
     accomView:{
         backgroundColor: COLORS.WHITE,
         width: "100%",
-        height: "20%",
-        borderWidth: 1,
+        height: "25%",
+        // borderWidth: 1,
         marginBottom: 10,
     },
     hotelsView:{
         width: "100%",
-        height: "20%",
-        borderWidth: 1,
+        height: "25%",
         marginBottom: 10,
-        backgroundColor: COLORS.PRIMARY,
+    },
+    cardView:{
+        width:200,
+        padding:5
+    },
+    cardImgView:{
+        width: "100%",
+        height:'70%',
+        borderRadius:5,
+    },
+    touch:{
+        width:'100%',
+
     }
 });
