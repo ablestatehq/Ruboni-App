@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
 
-export const AccountStyles = StyleSheet.create({
+export const profileStyle = StyleSheet.create({
 
 });
