@@ -1,8 +1,9 @@
-import { Text, View, StatusBar, ImageBackground, ScrollView } from "react-native";
+import { Text, View, StatusBar, ImageBackground, ScrollView, FlatList, Image } from "react-native";
 import { AccommodationStyle } from "./style";
 import { AntDesign } from "@expo/vector-icons";
 import { COLORS } from "../../contants/contants";
 import Btn from "../../helper/Btn";
+import { tours } from "../../../dataTours/tours";
 
 export default function Accommodation(props){
     // const image = props.route.params.itemData.url;
@@ -25,18 +26,19 @@ export default function Accommodation(props){
                     {/* </View> */}
                     <View style={AccommodationStyle.adetail}>
                         <Text>
-                            Detailed description of the trip
+                            Detailed description of the accommodation
                         </Text>
                     </View>
                     <View style={AccommodationStyle.selectPackage}>
-                        <Text>Good to know section</Text>
-                        {/* This section should allow the user to remove things  */}
-                    </View>
-                    <View style={AccommodationStyle.aMap}>
-                        <Text>
-                            Where to go section.
-                        </Text>
-                        {/* This section should include a map  */}
+                        {/* This list show show the images of the hotel  */}
+                        <FlatList
+                            data={tours}
+                            renderItem={({item}) => {
+                                return <Image source={item.image} style={AccommodationStyle.showImg} />
+                            }}
+                            horizontal
+                            showsHorizontalScrollIndicator={false}
+                        />
                     </View>
                     <View style={AccommodationStyle.aBuy}>
                         <Text style={{borderWidth:1,padding:3, borderColor:COLORS.PRIMARY, color:COLORS.PRIMARY}}>$400</Text>
