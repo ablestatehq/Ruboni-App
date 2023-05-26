@@ -1,20 +1,7 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-
+import { Accommodation, Cart, Dashboard, ListAccommodation, ListActivities, Login, MakeReservation, Memory, SignUp, SourvinerView } from './src/components/screens';
+import AuthStack from './src/navigation/AuthStack';
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+    <AuthStack />
+    );
+  }
