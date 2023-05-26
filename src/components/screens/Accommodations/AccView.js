@@ -5,28 +5,32 @@ import { COLORS } from "../../contants/contants";
 import Btn from "../../helper/Btn";
 import { tours } from "../../../dataTours/tours";
 
-export default function Accommodation(props){
-    // const image = props.route.params.itemData.url;
+export default function Accommodation({navigation, route}){
+    
+    const {Title, image, description, price} = route.params
+
     return(
         <View style={AccommodationStyle.aContainer}>
             <View style={AccommodationStyle.header}>
-               <ImageBackground source={'image'} resizeMode="contain" style={AccommodationStyle.bkheader}>
+               <ImageBackground source={image} resizeMode="cover" style={AccommodationStyle.bkheader}>
                      {/* This section should have a background image. that is responsive  */}
                     <View style={{flexDirection:'row', alignItems:'center'}}>
-                        <AntDesign name="left" size={32} color={COLORS.PRIMARY} style={AccommodationStyle.backBtn} onPress={() => alert('it has to take me back to the first page')}/>
-                        <Text style={{fontSize:25, color:COLORS.WHITE, textAlign:'center'}}>Details</Text>
+                        <AntDesign name="left" size={32} color={COLORS.PRIMARY} style={AccommodationStyle.backBtn} onPress={() => {
+                            navigation.navigate('Home')
+                        }}/>
+                        <Text style={{fontSize:25, color:COLORS.PRIMARY, textAlign:'center',marginLeft:50}}>Details</Text>
                     </View>
                </ImageBackground>
             </View>
             <View style={AccommodationStyle.zindexView}>
                 <ScrollView contentContainerStyle={AccommodationStyle.accScroll}>
-                    {/* <View st> */}
+                    <View>
                     {/* <Text>{props.route.itemData.title}</Text> */}
-                    <Text>title</Text>
-                    {/* </View> */}
+                    <Text>{Title}</Text>
+                    </View>
                     <View style={AccommodationStyle.adetail}>
                         <Text>
-                            Detailed description of the accommodation
+                            {description}
                         </Text>
                     </View>
                     <View style={AccommodationStyle.selectPackage}>
@@ -43,7 +47,13 @@ export default function Accommodation(props){
                     <View style={AccommodationStyle.aBuy}>
                         <Text style={{borderWidth:1,padding:3, borderColor:COLORS.PRIMARY, color:COLORS.PRIMARY}}>$400</Text>
                         <Btn BtnStyle={AccommodationStyle.bookBtn} 
-                        Onpress={()=>alert('it works')}
+                        Onpress={()=>{
+                            navigation.navigate('MakeReservation', {
+                                Title:Title,
+                                price:price,
+                                image:image
+                            });
+                        }}
                         BtnTextStyle={AccommodationStyle.btnText}
                         BtnText="Book now"/>
                     </View>

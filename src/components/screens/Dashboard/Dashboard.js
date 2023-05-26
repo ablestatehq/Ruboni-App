@@ -5,7 +5,7 @@ import { COLORS } from "../../contants/contants";
 import { tours } from "../../../dataTours/tours";
 import ItemCard from "../../helper/ItemCard";
 
-function Dashboard() {
+function Dashboard({navigation}) {
     return ( 
         <View style={DashboardStyle.container}>
             <View style={DashboardStyle.searchView}>
@@ -28,14 +28,19 @@ function Dashboard() {
                                     <ItemCard 
                                     itemCard={DashboardStyle.cardView}
                                     url={item.image}
-                                    {...console.log(item.image)}
+                                    // {...console.log(item.image)}
                                     imgStyle={DashboardStyle.cardImgView}
                                     itemDes={DashboardStyle.desStyle}
                                     description={item.description}
                                     itemFooter={DashboardStyle.cardFooter}
                                     itemF={DashboardStyle.text}
                                     price={item.price}
-                                    touchImage={() => alert(`Okay, ${item.Title}`)}
+                                    touchImage={() => {
+                                        // Navigate to the item.
+                                        navigation.navigate('Accommodation',{
+                                            ...item
+                                        })
+                                    }}
                                     touchStyle={DashboardStyle.touch}/>
                                 }
                     horizontal
@@ -51,7 +56,7 @@ function Dashboard() {
                     renderItem={({item}) => 
                                     <ItemCard 
                                     itemCard={DashboardStyle.cardView}
-                                    image={item.image}
+                                    url={item.image}
                                     imgStyle={DashboardStyle.cardImgView}
                                     itemDes={DashboardStyle.desStyle}
                                     description={item.description}

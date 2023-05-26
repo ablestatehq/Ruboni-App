@@ -6,7 +6,8 @@ export const COLORS = {
     PRIMARY_2:'#EAFDFC',
     WHITE: '#fff',
     WHITE_1:'#F9F8F8',
-    BLACK: '#00000',
+    BLACK: '#000',
+    GREEN:'00FF00'
 }
 
 export const DIMENS = {

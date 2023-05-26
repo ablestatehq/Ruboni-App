@@ -15,7 +15,11 @@ export const AccommodationStyle = StyleSheet.create({
         height:'30%',
         width:'95%',
         borderRadius:10,
-        backgroundColor:'blue',
+    },
+    bkheader:{
+        width:'100%',
+        height:'100%',
+        borderRadius:10,
     },
     zindexView:{
         width:'90%',
