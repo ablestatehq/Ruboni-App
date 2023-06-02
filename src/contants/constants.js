@@ -23,5 +23,6 @@ export const FONTS = {
         HEADING: 20,
         NORMAL: 1.2,
         SMALLEST: 7
-    }
+    },
+    
 }
