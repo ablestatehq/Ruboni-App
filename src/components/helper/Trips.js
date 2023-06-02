@@ -3,7 +3,7 @@ import {
     Text,
     StyleSheet
 } from 'react-native'
-import { COLORS } from '../contants/contants'
+import { COLORS } from '../../constants/constants'
 export default function Trips({title, description}){
     return(
         <View style={styles.container}>
