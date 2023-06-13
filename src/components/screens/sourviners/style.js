@@ -2,7 +2,7 @@ import {
     StyleSheet
 } from 'react-native';
 import { AccommodationStyle } from '../Accommodations/style';
-import { COLORS } from '../../contants/contants';
+import { COLORS } from '../../../constants/constants';
 
 export const sourvinerStyles = StyleSheet.create({
     sContainer:{
@@ -12,7 +12,9 @@ export const sourvinerStyles = StyleSheet.create({
         ...AccommodationStyle.header
     },
     bkheader:{
-
+        width:"100%",
+        height:'100%',
+        borderRadius:10,
     },
     backBtn:{
         
@@ -36,5 +38,5 @@ export const sourvinerStyles = StyleSheet.create({
     },
     btnText:{
         ...AccommodationStyle.btnText,
-    }
+    },
 });
