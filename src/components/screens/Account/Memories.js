@@ -9,7 +9,7 @@ import { profileStyle } from './style';
 import { AntDesign } from '@expo/vector-icons';
 import { COLORS } from '../../../constants/constants';
 import { tours } from '../../../dataTours/tours';
-import Trips from '../../helper/Trips';
+import Trips from '../Trips/Trips';
 import { useState } from 'react';
 import * as ImagePicker from 'expo-image-picker';
 
