@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { COLORS, DIMENS } from "../../contants/contants";
+import { COLORS, DIMENS } from "../../../constants/constants";
 
 export const LoginStyle = StyleSheet.create({
         container:{
@@ -54,10 +54,15 @@ export const LoginStyle = StyleSheet.create({
             height: '70%',
             alignItems:'center'
         },
+        formContainer:{
+            width:"100%",
+            flexDirection:"column",
+            justifyContent:'space-between',
+            alignItems:"center",
+        },
         inputField: {
             // TextInput field for login section 
-            width:'80%',
-            height:40,
+            width:'90%',
             padding: 10,
             borderWidth:1,
             margin: 20,

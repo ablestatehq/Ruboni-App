@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { COLORS } from "../../contants/contants";
+import { COLORS } from "../../../constants/constants";
 import { LoginStyle } from "../LoginScreen/style";
 
 const {container, header} = LoginStyle;
@@ -50,7 +50,7 @@ export const SignUpStyle = StyleSheet.create({
         height:40,
         padding: 10,
         borderWidth:1,
-        margin: 20,
+        margin: 10,
         borderColor: COLORS.PRIMARY,
         borderRadius: 10,
     },
