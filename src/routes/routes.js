@@ -1,15 +1,14 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
 import { 
     Accommodation, 
-    Book, Cart, 
-    Dashboard, Itinerary, 
+    Cart, Itinerary, 
     ListAccommodation, 
     ListActivities, 
     Login, MakeReservation, 
     Memory, Notification, 
     Payment, PaymentMethod, 
     Profile, Settings, SignUp, 
-    SourvinerView, ViewTourPackage
+    SourvinerView, TripCreation, ViewTourPackage
  } from "../components/screens";
 import TabStack from "./Tab.Navigator";
 
@@ -37,7 +36,7 @@ export function LoggedInStack(){
             <LoggedInStack.Screen name="Settings" component={Settings} />
             <LoggedInStack.Screen name="Memory" component={Memory} />
             <LoggedInStack.Screen name="Itinerary" component={Itinerary} />
-            <LoggedInStack.Screen name="Book" component={Book} />
+            <LoggedInStack.Screen name="TripCreation" component={TripCreation} />
         </LoggedStack.Navigator>
     )
 }
@@ -75,7 +74,7 @@ export const GuestUserStack = () => {
             <GuestStack.Screen name="Settings" component={Settings} />
             <GuestStack.Screen name="Memory" component={Memory} />
             <GuestStack.Screen name="Itinerary" component={Itinerary} />
-            <GuestStack.Screen name="Book" component={Book} />
+            <GuestStack.Screen name="TripCreation" component={TripCreation} />
         </GuestStack.Navigator>
     )
 }
