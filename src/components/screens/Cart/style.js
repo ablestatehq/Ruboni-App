@@ -26,10 +26,23 @@ export const cartStyle = StyleSheet.create({
 
     leftSide:{
         width:"30%",
-        borderWidth:1,
-        margin:5
+        // borderWidth:1,
+        margin:5,
+        padding:5,
+        height:'70%',
+        justifyContent:"space-between"
+        
     },
-    
+    btn:{
+        backgroundColor: COLORS.PRIMARY,
+        alignItems:"center",
+        padding:1,
+        borderRadius:5,
+    },
+    btnText:{
+        color:COLORS.WHITE
+    },
+
     // Item styles end here
 
     // Styles of cart here
@@ -42,7 +55,8 @@ export const cartStyle = StyleSheet.create({
     header:{
         backgroundColor:COLORS.PRIMARY,
         flexDirection:'row',
-        alignItems:'center'
+        alignItems:'center',
+        padding:5
     },
     textCart:{
         color: COLORS.WHITE,
@@ -71,6 +85,5 @@ export const cartStyle = StyleSheet.create({
     orderBtnText:{
         textAlign:'center',
         color:COLORS.WHITE,
-    }
-
+    },
 })
