@@ -9,7 +9,7 @@ export const LoginStyle = StyleSheet.create({
         },
         header:{
             width: '100%',
-            height: '10%',
+            height: '7%',
             flexDirection: 'row',
             alignItems: "center"
         },

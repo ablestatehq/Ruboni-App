@@ -9,8 +9,10 @@ import { COLORS } from "../../../constants/constants"
 import { TouchableOpacity } from "react-native"
 import { Formik } from "formik"
 import * as yup from 'yup';
-import { useContext } from "react"
+import { useContext, } from "react"
 import appwriteContext from "../../contexts/appwriteContext"
+import { signUp } from "../../../utils/functions"
+import UserType from '../../../utils/enum'
 
 export default function SignUp({navigation}) {
     const { appwrite } = useContext(appwriteContext);
@@ -21,10 +23,19 @@ export default function SignUp({navigation}) {
                 <Text style={SignUpStyle.signText}>Register with Us</Text>
             </View>
             <Formik 
-                initialValues={{name:"", email:"", password:"", phonenumber:"", confirmPassword:""}}
-                onSubmit={values => console.log(values)}
+                initialValues={{fName:"",lName:"", email:"", password:"", phonenumber:"", confirmPassword:""}}
+                onSubmit={values => {
+                    console.log(values.email);
+                    const object = {...values, userType:UserType.Cust }
+                    signUp(appwrite, object);
+                    navigation.navigate('Login')
+                }}
                 validationSchema={yup.object().shape({
-                    name: yup
+                    fName: yup
+                    .string()
+                    .required(),
+
+                    lName: yup
                     .string()
                     .required(),
 
@@ -66,12 +77,22 @@ export default function SignUp({navigation}) {
                             <TextInput 
                             style={SignUpStyle.inputField} 
                             placeholderTextColor={COLORS.PRIMARY} 
-                            onBlur={() => setFieldTouched('name')}
-                            onChangeText={handleChange('name')}
-                            value={values.name}
-                            placeholder="Full name"/>
+                            onBlur={() => setFieldTouched('fName')}
+                            onChangeText={handleChange('fName')}
+                            value={values.fName}
+                            placeholder="First name"/>
 
-                            {touched.name && errors.name && <Text style={{fontSize:10, color:COLORS.RED, margin: 0}}>{errors.name}</Text>}
+                            {touched.fName && errors.fName && <Text style={{fontSize:10, color:COLORS.RED, margin: 0}}>{errors.fName}</Text>}
+
+                            <TextInput 
+                            style={SignUpStyle.inputField} 
+                            placeholderTextColor={COLORS.PRIMARY} 
+                            onBlur={() => setFieldTouched('lName')}
+                            onChangeText={handleChange('lName')}
+                            value={values.lName}
+                            placeholder="Last name"/>
+
+                            {touched.lName && errors.lName && <Text style={{fontSize:10, color:COLORS.RED, margin: 0}}>{errors.lName}</Text>}
                             
                             <TextInput
                             style={SignUpStyle.inputField} 
@@ -99,6 +120,7 @@ export default function SignUp({navigation}) {
                             placeholderTextColor={COLORS.PRIMARY} 
                             onBlur={() => setFieldTouched('password')}
                             onChangeText={handleChange('password')}
+                            secureTextEntry
                             placeholder="password"
                             value={values.password}/>      
 
@@ -108,23 +130,14 @@ export default function SignUp({navigation}) {
                             style={SignUpStyle.inputField} 
                             placeholderTextColor={COLORS.PRIMARY} 
                             onBlur={() => setFieldTouched('confirmPassword')}
+                            secureTextEntry
                             onChangeText={handleChange('confirmPassword')}
                             value={values.confirmPassword}
                             placeholder="confirm password" />
 
                             {touched.confirmPassword && errors.confirmPassword && <Text style={{fontSize:10, color:COLORS.RED, margin: 0}}>{errors.confirmPassword}</Text>}
 
-                            <TouchableOpacity style={SignUpStyle.signBtn} onPress={() => {
-                                alert(values.name)
-                                // console.log(handleSubmit())
-                                const firtName = values.name.split(" ")[0]
-                                const lastName = values.name.split(" ")[0]
-                                appwrite.createAccount(values.email, firtName,lastName, values.phonenumber, values.confirmPassword).then(response => {
-                                    console.log(response)
-                                }).catch(error => {
-                                    console.log(error)
-                                })
-                            }}>
+                            <TouchableOpacity style={SignUpStyle.signBtn} onPress={handleSubmit}>
                                 <Text style={SignUpStyle.sign}>Sign Up</Text>
                             </TouchableOpacity>
                             <View style={SignUpStyle.yesAccountSection}>
