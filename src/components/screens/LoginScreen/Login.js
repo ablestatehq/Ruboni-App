@@ -10,12 +10,13 @@ import { COLORS } from "../../../constants/constants"
 import { AntDesign } from "@expo/vector-icons"
 import { Formik } from "formik"
 import * as yup from 'yup';
-import { useContext, useEffect } from "react"
+import { useContext } from "react"
 import appwriteContext from "../../contexts/appwriteContext"
-import {databaseId, uCollection} from '../../../constants/constants'
+import { databaseId, uCollection} from '../../../constants/constants'
 
 export default function Login({navigation}){
-    const { appwrite, setIsLoggedIn,user, setUser } = useContext(appwriteContext);
+    const { appwrite, setIsLoggedIn,user, setUser, setToken } = useContext(appwriteContext);
+    const expireDuration = 2592000;
     return(
         <View style={LoginStyle.container}>
             <View style={LoginStyle.header}>
@@ -36,15 +37,32 @@ export default function Login({navigation}){
                             // console.log(values)
                             try {
                                 appwrite.login(values.email, values.password).then( async (response) => {
-                                    const users = await appwrite.returnDocument(databaseId, uCollection, response.userId)
-                                    
-                                    setIsLoggedIn(true);
-                                    
-                                    setUser({...users.documents});
-                                    console.log("Logged now",user)
+                                    const { $id: sessionId } = response;
+                                    const { userId } = response;
+                                    console.log(userId)
+                                    let user = {}
+                                    await appwrite.returnDocument(databaseId, uCollection, response.userId).then(data => {
+                                        user = {...data};
+                                    })
+                                    // return appwrite.account.createJWT(sessionId);
+                                    setUser({...user.documents[0]});
+                                    console.log("Logged now",user.documents[0])
+                                    // console.log(sessionId)
+                                    console.log(user)
+                                    setIsLoggedIn(true)
                                 }).catch(error => {
-                                    console.log(error)
+                                    console.log("Error here in login",error)
                                 })
+                                // .then(response => {
+                                //     const { jwt } = response;
+                                //     console.log(jwt)
+                                //     setIsLoggedIn(true);
+                                //     // console.log(response);
+                                //     AsyncStorage.setItem('accessToken', JSON.stringify(response))
+                                //     console.log(jwt);
+                                // }).catch(error => {
+                                //     console.log("In login",error)
+                                // })
                             } catch (error) {
                                 console.log(error)
                             }

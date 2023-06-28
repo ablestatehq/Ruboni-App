@@ -11,7 +11,7 @@ import { COLORS } from "../../../constants/constants";
 import { useContext, useEffect, useState } from "react";
 import CartContext from "../../contexts/cart";
 import Dialog from "../../helper/dialog";
-import { getLocalCart, localCart } from "../../../utils/cartFunctions";
+import { getLocalItem, localCart } from "../../../utils/cartFunctions";
 
 export default function SourvinerView({navigation, route}){
     const { name, image, price } = route.params;
@@ -33,10 +33,10 @@ export default function SourvinerView({navigation, route}){
     return(
         <View style={sourvinerStyles.sContainer}>
             <View style={sourvinerStyles.header}>
-               <ImageBackground source={image} resizeMode="contain" style={sourvinerStyles.bkheader}>
+               <ImageBackground source={image} resizeMode="cover" style={sourvinerStyles.bkheader}>
                      {/* This section should have a background image. that is responsive  */}
                     <View style={{flexDirection:'row', alignItems:'center'}}>
-                        <AntDesign name="left" size={32} color={COLORS.PRIMARY} style={sourvinerStyles.backBtn} onPress={() => {
+                        <AntDesign name="left" size={32} color={COLORS.WHITE} style={sourvinerStyles.backBtn} onPress={() => {
                             navigation.navigate('Dashboard')
                         }}/>
                         <Text style={{fontSize:25, color:COLORS.WHITE, textAlign:'center'}}>{name}</Text>
@@ -73,9 +73,6 @@ export default function SourvinerView({navigation, route}){
                                 setCartItems(newItems);
                                 <Dialog isV={isVisible} title="Added to Cart" message={`${name} has been added to cart`} yesPressed={_handleVisibility} />
                                 navigation.navigate('Dashboard');
-                                // navigation.navigate('Cart',{
-                                //     screen_name: 'SourvinerView'
-                                // });
                            }
                             // console.log(cartItems);
                         }}

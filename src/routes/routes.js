@@ -12,69 +12,69 @@ import {
  } from "../components/screens";
 import TabStack from "./Tab.Navigator";
 
-const LoggedStack = createNativeStackNavigator();
-const cartStack = createNativeStackNavigator();
-const GuestStack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator();
+// const Stack = createNativeStackNavigator();
+// const Stack = createNativeStackNavigator();
 
 export function LoggedInStack(){
     return(
-        <LoggedStack.Navigator screenOptions={{
+        <Stack.Navigator screenOptions={{
             headerShown: false
         }}>
-            <LoggedInStack.Screen name="Home" component={TabStack} />
-            <LoggedInStack.Screen name="Profile" component={Profile} />
-            <LoggedInStack.Screen name="Accommodation" component={Accommodation} />
-            <LoggedInStack.Screen name="ListAccommodation" component={ListAccommodation} />
-            <LoggedInStack.Screen name="ListActivities" component={ListActivities} />
-            <LoggedInStack.Screen name="Payment" component={Payment} />
-            <LoggedInStack.Screen name="SourvinerView" component={SourvinerView} />
-            <LoggedInStack.Screen name="MakeReservation" component={MakeReservation} />
-            <LoggedInStack.Screen name="ViewPackage" component={ViewTourPackage} />
-            <LoggedInStack.Screen name="Cart" component={Cart} />
-            <LoggedInStack.Screen name="Notification" component={Notification} />
-            <LoggedInStack.Screen name="PaymentMethod" component={PaymentMethod} />
-            <LoggedInStack.Screen name="Settings" component={Settings} />
-            <LoggedInStack.Screen name="Memory" component={Memory} />
-            <LoggedInStack.Screen name="Itinerary" component={Itinerary} />
-            <LoggedInStack.Screen name="TripCreation" component={TripCreation} />
-        </LoggedStack.Navigator>
+            <Stack.Screen name="Home" component={TabStack} />
+            <Stack.Screen name="Profile" component={Profile} />
+            <Stack.Screen name="Accommodation" component={Accommodation} />
+            <Stack.Screen name="ListAccommodation" component={ListAccommodation} />
+            <Stack.Screen name="ListActivities" component={ListActivities} />
+            <Stack.Screen name="Payment" component={Payment} />
+            <Stack.Screen name="SourvinerView" component={SourvinerView} />
+            <Stack.Screen name="MakeReservation" component={MakeReservation} />
+            <Stack.Screen name="ViewPackage" component={ViewTourPackage} />
+            <Stack.Screen name="Cart" component={Cart} />
+            <Stack.Screen name="Notification" component={Notification} />
+            <Stack.Screen name="PaymentMethod" component={PaymentMethod} />
+            <Stack.Screen name="Settings" component={Settings} />
+            <Stack.Screen name="Memory" component={Memory} />
+            <Stack.Screen name="Itinerary" component={Itinerary} />
+            <Stack.Screen name="TripCreation" component={TripCreation} />
+        </Stack.Navigator>
     )
 }
 
-export function CartStack(){
+export function stack(){
     return (
-        <cartStack.Navigator screenOptions={{
+        <Stack.Navigator screenOptions={{
             headerShown:false
         }}>
-            <cartStack.Screen name="Cart" component={Cart}/>
-            <cartStack.Screen name="Payment" component={Payment} />
-        </cartStack.Navigator>
+            <Stack.Screen name="Cart" component={Cart}/>
+            <Stack.Screen name="Payment" component={Payment} />
+        </Stack.Navigator>
     )
 }
 
 export const GuestUserStack = () => {
     return(
-        <GuestStack.Navigator screenOptions={{
+        <Stack.Navigator screenOptions={{
             headerShown: false
         }}>
-            <GuestStack.Screen name="Home" component={TabStack} />
-            <GuestStack.Screen name="Login" component={Login} />
-            <GuestStack.Screen name="SignUp" component={SignUp} />
-            <GuestStack.Screen name="Profile" component={Profile} />
-            <GuestStack.Screen name="Accommodation" component={Accommodation} />
-            <GuestStack.Screen name="ListAccommodation" component={ListAccommodation} />
-            <GuestStack.Screen name="ListActivities" component={ListActivities} />
-            <GuestStack.Screen name="Payment" component={Payment} />
-            <GuestStack.Screen name="SourvinerView" component={SourvinerView} />
-            <GuestStack.Screen name="MakeReservation" component={MakeReservation} />
-            <GuestStack.Screen name="ViewPackage" component={ViewTourPackage} />
-            <GuestStack.Screen name="Cart" component={Cart} />
-            <GuestStack.Screen name="Notification" component={Notification} />
-            <GuestStack.Screen name="PaymentMethod" component={PaymentMethod} />
-            <GuestStack.Screen name="Settings" component={Settings} />
-            <GuestStack.Screen name="Memory" component={Memory} />
-            <GuestStack.Screen name="Itinerary" component={Itinerary} />
-            <GuestStack.Screen name="TripCreation" component={TripCreation} />
-        </GuestStack.Navigator>
+            <Stack.Screen name="Home" component={TabStack} />
+            <Stack.Screen name="Login" component={Login} />
+            <Stack.Screen name="SignUp" component={SignUp} />
+            <Stack.Screen name="Profile" component={Profile} />
+            <Stack.Screen name="Accommodation" component={Accommodation} />
+            <Stack.Screen name="ListAccommodation" component={ListAccommodation} />
+            <Stack.Screen name="ListActivities" component={ListActivities} />
+            <Stack.Screen name="Payment" component={Payment} />
+            <Stack.Screen name="SourvinerView" component={SourvinerView} />
+            <Stack.Screen name="MakeReservation" component={MakeReservation} />
+            <Stack.Screen name="ViewPackage" component={ViewTourPackage} />
+            <Stack.Screen name="Cart" component={Cart} />
+            <Stack.Screen name="Notification" component={Notification} />
+            <Stack.Screen name="PaymentMethod" component={PaymentMethod} />
+            <Stack.Screen name="Settings" component={Settings} />
+            <Stack.Screen name="Memory" component={Memory} />
+            <Stack.Screen name="Itinerary" component={Itinerary} />
+            <Stack.Screen name="TripCreation" component={TripCreation} />
+        </Stack.Navigator>
     )
 }

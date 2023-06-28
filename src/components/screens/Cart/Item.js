@@ -75,7 +75,7 @@ const Item = ({cost, url,name}) =>{
                     arr.splice(index,1);
                     setCartItems(arr);
                     if(arr.length === 0){
-                        clearStorage();
+                        clearStorage("cartItemList");
                     }else{
                         localCart(arr);
                     }

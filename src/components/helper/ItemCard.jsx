@@ -15,16 +15,17 @@ function ItemCard({itemCard,
                 buttonStyle,
                 OnPress,
                 textStyleBtn,
-                btnText
+                btnText,
+                OnLongPress = () =>{alert("Long pressed")}
                 }){
     // const url = props.image;
     return (
         <View style={itemCard}>
-            <TouchableOpacity onPress={touchImage} style={touchStyle}>
+            <TouchableOpacity onPress={touchImage} style={touchStyle} onLongPress={OnLongPress}>
                 <Image source={url} style={imgStyle}/>
             </TouchableOpacity>
             <Text style={itemDes}>{
-                description.length > 10 ? description.slice(10) + '...': description
+                description.length > 30 ? description.slice(0, 30) + '...': description
             }</Text>
             <View style={itemFooter}>
                 <Text style={itemF}>{days}</Text>

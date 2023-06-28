@@ -9,12 +9,16 @@ export const sourvinerStyles = StyleSheet.create({
         ...AccommodationStyle.aContainer
     },
     header:{
-        ...AccommodationStyle.header
+        ...AccommodationStyle.header,
+        borderRadius: 5,
+        
     },
     bkheader:{
         width:"100%",
         height:'100%',
         borderRadius:10,
+        flex:1,
+        overflow: 'hidden'
     },
     backBtn:{
         
