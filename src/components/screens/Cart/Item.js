@@ -9,33 +9,59 @@ import { useContext, useState } from "react";
 import Btn from "../../helper/Btn";
 import { cartStyle } from './style';
 import CartContext from "../../contexts/cart";
+import { clearStorage, localCart } from "../../../utils/cartFunctions";
 
 const Item = ({cost, url,name}) =>{
     const { cartCount, setCartCount, cartItems, setCartItems} = useContext(CartContext);
+    const [ isable, setIsable ] = useState(false)
     const [count, setCount] = useState(1);
     return (
         <View style={cartStyle.itemView}>
             <Image source={url} style={cartStyle.itemImg}/>
             <View style={cartStyle.leftSide}>
                 <View style={cartStyle.increase}>
-                    <AntDesign name="plus" size={24} color={COLORS.PRIMARY_1} onPress={() => {
+                    <AntDesign name="plus" size={24} color={COLORS.WHITE} style={{backgroundColor:COLORS.PRIMARY}} onPress={() => {
                         let value = count + 1;
                         setCount(value);
+                        // Looking for the item in the cartItems and change it's quantity
+                        const arr = [...cartItems];
+                        for(const obj of arr){
+                            if(Object.keys(obj).find(el => obj[el] === name)){
+                                // index = arr.indexOf(obj);
+                                obj['Qty'] = count;
+                                break;
+                            }
+                        }
+
+                        setCartItems(arr);
+                        localCart(arr);
                     }}/>
-                    <Text>{count}</Text>
-                    <AntDesign name="minus" size={24} color={COLORS.PRIMARY_1} onPress={() => {
+                    <Text style={{width:40, textAlign:"center"}}>{count}</Text>
+                    <AntDesign name="minus" disabled={isable} size={24} color={COLORS.WHITE} style={{backgroundColor:COLORS.PRIMARY}} onPress={() => {
                         if(count < 2){
-                            alert('One can\'t be reduced, you can decide to remove the item if you don\'t wnt it.')
+                            // alert('One can\'t be reduced, you can decide to remove the item if you don\'t wnt it.')
+                            setIsable(true);
                         }else{
                             let val = count - 1;
                             setCount(val);
+                             // Looking for the item in the cartItems and change it's quantity
+                            const arr = [...cartItems];
+                            for(const obj of arr){
+                                if(Object.keys(obj).find(el => obj[el] === name)){
+                                    obj['Qty'] = count;
+                                    break;
+                                }
+                            }
+
+                        setCartItems(arr);
+                        localCart(arr);
                         }
                     }}/>
                 </View>
                 <View>
-                    <Text>{`$${Number(cost.slice(1)) * count}`}</Text>
+                    <Text>T.Cost: {`$${Number(cost.slice(1)) * count}`}</Text>
                 </View>
-                <Btn BtnText="remove" BtnStyle={cartStyle.btn} Onpress={() => {
+                <Btn BtnText="Remove" BtnStyle={cartStyle.btn} Onpress={() => {
                     // Remove the item from the cartItems,
                     const arr = [...cartItems];
                     let index;
@@ -46,13 +72,13 @@ const Item = ({cost, url,name}) =>{
                         }
                     }
 
-                    arr.splice(index,1)
-                    
+                    arr.splice(index,1);
                     setCartItems(arr);
-
-                    // Reduce count of the item.
-                    let valCount = cartCount - 1;
-                    setCartCount(valCount);
+                    if(arr.length === 0){
+                        clearStorage();
+                    }else{
+                        localCart(arr);
+                    }
 
                 }} 
                 BtnTextStyle={cartStyle.btnText} />

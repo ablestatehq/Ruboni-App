@@ -1,6 +1,6 @@
 import { View, Text } from 'react-native';
 import { AntDesign } from '@expo/vector-icons'
-import { COLORS } from '../../contants/contants';
+import { COLORS } from '../../../constants/constants';
 
 export default function Notification(props){
     return (

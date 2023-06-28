@@ -7,7 +7,8 @@ export const COLORS = {
     WHITE: '#fff',
     WHITE_1:'#F9F8F8',
     BLACK: '#000',
-    GREEN:'00FF00'
+    GREEN:'#00FF00',
+    RED: '#FF0000'
 }
 
 export const DIMENS = {
@@ -20,9 +21,8 @@ export const DIMENS = {
 
 export const FONTS = {
     SIZE: {
-        HEADING: 20,
-        NORMAL: 1.2,
-        SMALLEST: 7
+        HEADING: 25,
+        NORMAL: 15,
+        SMALLEST: 10
     },
-    
 }

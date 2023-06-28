@@ -1,12 +1,13 @@
 import { StyleSheet } from "react-native";
-import { COLORS } from "../../contants/contants";
+import { COLORS, DIMENS } from "../../../constants/constants";
+import { FONTS } from "../../../constants/constants";
 
 export const profileStyle = StyleSheet.create({
     // The styles for Profile.js file start below
     pContainer:{
         flex:1,
-        justContent:'center',
-        alignItems: 'center',
+        justifyContent:"center",
+        alignItems:'center'
     },
     pheader:{
         flexDirection:'row',
@@ -80,3 +81,59 @@ export const profileStyle = StyleSheet.create({
         margin:10,
     }
 });
+
+
+export const settingStyle = StyleSheet.create({
+    container:{
+        width:DIMENS.SCREENWIDTH,
+        height: DIMENS.SCREENHEIGHT,
+        backgroundColor:COLORS.WHITE_1
+    },
+
+    settingHeader:{
+        flexDirection:"row",
+        alignItems:"center",
+        padding:10,
+        backgroundColor:COLORS.WHITE
+    },
+
+    settingHT:{
+        fontSize:FONTS.SIZE.HEADING,
+        marginLeft:40,
+    },
+
+    settings:{
+        padding:10,
+        backgroundColor:COLORS.WHITE,
+        margin:10
+    },
+
+    clickSettings:{
+        margin:5,
+        flexDirection:"row",
+        justifyContent:"space-between",
+        height:30
+    }
+});
+
+export const paymentMethods = StyleSheet.create({
+    container:{
+
+    },
+
+    header:{
+        flexDirection: "row",
+        alignItems:"center",
+        padding:5,
+        backgroundColor:COLORS.WHITE
+    },
+
+    payText: {
+        fontSize: 20,
+        marginLeft:20,
+    },
+
+    content:{
+        padding:10,
+    }
+})
