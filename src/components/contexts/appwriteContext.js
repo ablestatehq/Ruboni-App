@@ -10,7 +10,9 @@ export default AppwriteContext = createContext({
     user: null,
     setUser: () => {},
     token: null,
-    setToken: () => {}
+    setToken: () => {},
+    profile: null,
+    setProfile: () => {}
 });
 
 export const AppwriteProvider = ({children}) => {
@@ -18,6 +20,7 @@ export const AppwriteProvider = ({children}) => {
     const [ user, setUser ] = useState({});
     const [ token, setToken ] = useState({});
     const [ isLoading, setIsLoading ] = useState(false);
+    const [ profile, setProfile ] = useState(null)
 
     const defaultValue = {
         appwrite: new AppwriteService(),
@@ -28,7 +31,9 @@ export const AppwriteProvider = ({children}) => {
         user,
         setUser,
         token,
-        setToken
+        setToken,
+        profile,
+        setProfile
         }
     return(
         <AppwriteContext.Provider value={defaultValue}>

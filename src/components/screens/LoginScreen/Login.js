@@ -5,8 +5,8 @@ import { Text,
          TouchableOpacity
 } from "react-native"
 
-import { LoginStyle } from "./style"
-import { COLORS } from "../../../constants/constants"
+import { LoginStyle } from "./style"  
+import { COLORS, userBucket } from "../../../constants/constants"
 import { AntDesign } from "@expo/vector-icons"
 import { Formik } from "formik"
 import * as yup from 'yup';
@@ -15,7 +15,7 @@ import appwriteContext from "../../contexts/appwriteContext"
 import { databaseId, uCollection} from '../../../constants/constants'
 
 export default function Login({navigation}){
-    const { appwrite, setIsLoggedIn,user, setUser, setToken } = useContext(appwriteContext);
+    const { appwrite, setIsLoggedIn,user, setUser, setToken, setProfile } = useContext(appwriteContext);
     const expireDuration = 2592000;
     return(
         <View style={LoginStyle.container}>
@@ -39,30 +39,25 @@ export default function Login({navigation}){
                                 appwrite.login(values.email, values.password).then( async (response) => {
                                     const { $id: sessionId } = response;
                                     const { userId } = response;
-                                    console.log(userId)
+
+                                    appwrite.getUserPref().then(data => {
+                                        // console.log(data);
+                                        const p = appwrite.storage.getFilePreview(userBucket, data.DP).href;
+                                        setProfile(p);
+                                    }).catch(error => {
+                                        console.log("Error in getting userPrefs",error)
+                                    })
                                     let user = {}
                                     await appwrite.returnDocument(databaseId, uCollection, response.userId).then(data => {
                                         user = {...data};
                                     })
                                     // return appwrite.account.createJWT(sessionId);
                                     setUser({...user.documents[0]});
-                                    console.log("Logged now",user.documents[0])
-                                    // console.log(sessionId)
-                                    console.log(user)
+
                                     setIsLoggedIn(true)
                                 }).catch(error => {
                                     console.log("Error here in login",error)
                                 })
-                                // .then(response => {
-                                //     const { jwt } = response;
-                                //     console.log(jwt)
-                                //     setIsLoggedIn(true);
-                                //     // console.log(response);
-                                //     AsyncStorage.setItem('accessToken', JSON.stringify(response))
-                                //     console.log(jwt);
-                                // }).catch(error => {
-                                //     console.log("In login",error)
-                                // })
                             } catch (error) {
                                 console.log(error)
                             }
@@ -75,7 +70,6 @@ export default function Login({navigation}){
                             password: yup
                             .string()
                             .min(5, "Password should not be less than 5")
-                            // .max(10, "Password should not exceed 10 characters")
                             .required()
                         })}
                         >

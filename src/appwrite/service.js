@@ -2,7 +2,6 @@ import { Client, Databases, Account, ID, Query, Storage, } from 'appwrite';
 import { APPWRITE_PROJECT_ID, APPWRITE_API_ENDPOINT } from "@env";
 import { userBucket } from '../constants/constants';
 
-
 const appwriteClient = new Client();
 
 export default class AppwriteService {
@@ -20,8 +19,8 @@ export default class AppwriteService {
         this.databases = new Databases(appwriteClient);
         this.storage = new Storage(appwriteClient);
     }
-
-    async createAccount(email, name, password){
+    
+       async createAccount(email, name, password){
         try {
             const userAccount = await this.account.create(ID.unique(), email, password, name).then(async () => {
                 //TODO: create a trigger that saves a user in the user's database.
@@ -144,6 +143,12 @@ export default class AppwriteService {
         }
     }
 
+    async list_documents(databaseId, uCollection, user){
+        return await this.databases.listDocuments(databaseId, uCollection, [
+            Query.equal("userId", [user.userId])
+        ])
+    }
+
     // return Document
     async returnDocument(databaseId, collectionId, userId){
         try{
@@ -189,21 +194,6 @@ export default class AppwriteService {
         }
     }
 
-    // Storage section
-    async storeFiles(file){
-        try {
-            const response = await fetch(file.uri);
-            const blob = await response.blob();
-
-            const fileObject = new File([blob], file.assetId, { type: file.type });
-
-            const createFileResponse = await this.storage.createFile(userBucket, ID.unique(),fileObject)
-            return createFileResponse;
-        } catch (error) {
-            alert("Something went wrong -- appwrite");
-            // console.log("appwrite -- storeFiles() -- ", error)
-        }
-    }
 
     // get the file in a storage bucket
     async userFile(bucketId, fileId){
@@ -213,4 +203,35 @@ export default class AppwriteService {
             console.log("Appwrite -- userFile() -- ", error)
         }
     }
+
+    async listFiles(bucketId){
+        try {
+            return this.storage.listFiles(bucketId)
+        } catch (error) {
+            console.log("appwrite -- listFiles -- ", error);
+        }
+    }
+
+     // Storage section
+     async storeFiles(file){
+        try {
+
+            const response = await fetch(file.uri);
+            // console.log("Response ", response)
+            const blob = await response.blob();
+
+            // console.log("Blob ",blob);
+
+            const fileObject = new File([blob], file.assetId ? file.assetId : "large_image", { type: "image/jpeg" });
+
+            const createFileResponse = await this.storage.createFile(userBucket, ID.unique(),fileObject);
+            // console.log(createFileResponse.sizeOriginal);
+            return createFileResponse;
+
+        } catch (error) {
+            alert("Something went wrong -- appwrite");
+            console.log("appwrite -- storeFiles() -- ", error)
+        }
+    }
+    
 }

@@ -2,8 +2,11 @@ import {
     SafeAreaView,
     View,
     Text,
-    Animated,
+    Modal,
+    TextInput
 } from 'react-native';
+
+
 import Btn from '../../helper/Btn';
 import { profileStyle } from './style';
 import Dialog from '../../helper/dialog';
@@ -11,32 +14,20 @@ import { useContext, useState } from 'react'
 import appwriteContext from '../../contexts/appwriteContext';
 import { clearStorage } from '../../../utils/cartFunctions';
 import { Avatar } from 'react-native-paper';
-import { COLORS, DIMENS, userBucket } from '../../../constants/constants';
+import { COLORS, databaseId, uCollection } from '../../../constants/constants';
 import { AntDesign } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
+import { checkSpace, saveFile } from '../../../utils/functions';
 
-export default function Profile({navigation}) {
-    const HEADER_HEIGHT = DIMENS.SCREENHEIGHT*(3/10);
+
+export default function Profile({navigation}){
+
     const [isVisible, setIsVisible] = useState(false);
-    const { appwrite, isLoggedIn, setIsLoggedIn, user } = useContext(appwriteContext);
-    const [ isEdit, setIsEdit ] = useState(false);
-    const [ scrollY, setScrollY ] = useState(new Animated.Value(0));
-    const [ profile, setProfile ] = useState(null)
-
-    const headerHeight = scrollY.interpolate({
-        inputRange: [0, HEADER_HEIGHT],
-        outputRange: [HEADER_HEIGHT, 0],
-        extrapolate: 'clamp'
-    });
-
-    
-    const { state, setState } = useState({
-        fname:'',
-        lname: '',
-        phone:'',
-        country: '',
-        email: '',
-    })
+    const { appwrite, isLoggedIn, setIsLoggedIn, user, profile, setProfile } = useContext(appwriteContext);
+    const [ change, setChange ] = useState(false);
+    const [ name, setName ] = useState('');
+    const [ email, setEmail ] = useState('');
+    const [ phone, setPhone ] = useState('');
 
     // Event handlers here
     const toggleDialogVisibility = () => {
@@ -52,39 +43,31 @@ export default function Profile({navigation}) {
             allowsMultipleSelection:true
         });
 
-        // console.log("Bucket",userBucket);
         if(!results.canceled){
-            console.log(results.assets[0])
-             appwrite.storeFiles(results.assets[0])
-            .then(data => {
+            saveFile(results.assets[0].uri, "profilePicture").then(res => {
+                // console.log("SAVED WHAT I WANTED")
                 setProfile(results.assets[0].uri);
-                console.log(data)
             }).catch(error => {
-                console.log("pickImage() -- storeFiles() -- ",error);
+                console.log("saveFile",error)
             })
         }else{
             console.log("Canceled")
         }
-
-        // console.log(profile)
     }
     const pressYes = () => {
         appwrite.logout().then(res => { 
             clearStorage("accessToken");
+            setIsLoggedIn(false);
+            setIsVisible(!isVisible)
         });
-        setIsLoggedIn(false);
-        setIsVisible(!isVisible)
     }
     
     const pressNo = () => {
         setIsVisible(!isVisible);
     }
 
-    const toggleEdit = () => {
-        setIsEdit(!isEdit);
-    }
-    // Event handlers end here.
 
+    // Event handlers end here.
     return(
         <SafeAreaView style={profileStyle.pContainer}>
                 <View style={profileStyle.avatarIcon}>
@@ -133,12 +116,96 @@ export default function Profile({navigation}) {
                 </View>
                 <View style={profileStyle.pcardBtn}>
                     <View style={profileStyle.ptransparentBtn}>
-                        <Text>Privacy</Text>
+                        <Text>Change Profile Information</Text>
                         <AntDesign name='right' size={20} color={COLORS.BLACK}  onPress={() => {
-                            alert("It works")
+                            // alert("It works")
+                            setChange(true)
                         }}/>
-                    </View>
+                        <Modal visible={change} animationType='fade' transparent={true}>
+                        <View style={{        
+                            flex:1,
+                            alignItems:'center',
+                            justifyContent:'center',
+                            }}>
+                                <Text>Change Your Profile Information</Text>
+                                <View style={{
+                                            width:'80%',
+                                            elevation:24,
+                                            backgroundColor:COLORS.PRIMARY_1,
+                                            padding:20}}>
+                                    <TextInput
+                                    placeholder="Change your name"
+                                    style={{
+                                        borderWidth:1,
+                                        borderColor:COLORS.PRIMARY,
+                                        padding:5,
+                                    }}
+                                    onChangeText={text => setName(text)}
+                                    />
 
+                                    <TextInput 
+                                    placeholder='Change your email'
+                                    style={{
+                                        borderWidth:1,
+                                        borderColor:COLORS.PRIMARY,
+                                        padding:5,
+                                    }}
+                                    keyboardType='email-address'
+                                    onChangeText={text => setEmail(text)}/>
+
+                                    <TextInput 
+                                    placeholder='phone number' 
+                                    style={{
+                                        borderWidth:1,
+                                        borderColor:COLORS.PRIMARY,
+                                        padding:5,
+                                    }}
+                                    keyboardType='phone-pad'
+                                    onChangeText={text => setPhone(text)}
+                                    />
+
+                                    <View style={{flexDirection: 'row', justifyContent:'space-between'}}>
+                                        <Btn BtnStyle={{
+                                            marginTop:12,
+                                            marginRight:8,
+                                            }}
+                                            BtnText="Yes"
+                                            Onpress={() => {
+                                                let id;
+                                                appwrite.list_documents(databaseId, uCollection, user).then(res => {
+                                                    id = res.documents[0]["$id"];
+                                                    if(checkSpace(name)){
+                                                        const [ firstName, lastName ] = name.split(" ")
+                                                        appwrite.updateDocument(databaseId, uCollection, id, {
+                                                            firstName,
+                                                            lastName,
+                                                            email,
+                                                            phone
+                                                        }).then(response => {
+                                                            // make sure to update the account section.
+                                                        })
+                                                    }else{
+                                                        appwrite.updateDocument()
+                                                    }
+                                                }).catch(error => {
+                                                    console.log("Error ", error)
+                                                })
+                                            }}
+                                            />
+
+                                        <Btn BtnStyle={{
+                                            marginTop:12,
+                                            marginRight:8,
+                                            }}
+                                            BtnText="No"
+                                            Onpress={() => {
+                                                setChange(false)
+                                            }}/>
+                                    </View>
+                                </View>
+                        </View>
+                    </Modal>
+                    </View>
                     <View style={profileStyle.ptransparentBtn}>
                         <Text>Trip history</Text>
                         <AntDesign name='right' size={20} color={COLORS.BLACK}  onPress={() => {
