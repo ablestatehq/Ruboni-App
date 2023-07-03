@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 import { AccommodationStyle } from "../Accommodations/style";
-import { COLORS } from "../../contants/contants";
+import { COLORS } from "../../../constants/constants";
 
 export const ActivityStyle = StyleSheet.create({
     // styles for the viewActivity.js file below,
@@ -21,7 +21,7 @@ export const ActivityStyle = StyleSheet.create({
         ...AccommodationStyle.adetail,
     },
     selectPackage:{
-        ...AccommodationStyle.selectPackage
+        width: "90%"
     },
     pbuy:{
         ...AccommodationStyle.aBuy,
@@ -34,9 +34,23 @@ export const ActivityStyle = StyleSheet.create({
     btnText:{
         color:COLORS.WHITE
     },
+    bkheader:{
+        height:'100%',
+        width:'100%',
+        borderRadius:10,
+        flex: 1,
+        overflow: "hidden"
+    },
+    aMap:{
+        // ...AccommodationStyle.adetail,
+    },
+    
     // styles for the list_of_activities below
     listItemsView:{
-        ...AccommodationStyle.listItemsView
+        backgroundColor:COLORS.PRIMARY,
+        flexDirection: "row",
+        alignItems:"center",
+        padding:5
     },
     listHeaderText:{
         ...AccommodationStyle.listHeaderText

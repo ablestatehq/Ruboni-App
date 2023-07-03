@@ -1,17 +1,21 @@
 import { FlatList, StatusBar, Text, View } from "react-native";
 import { AccommodationStyle } from "./style";
 import { AntDesign } from "@expo/vector-icons";
-import { tours } from '../../../dataTours/tours'
-import { COLORS } from "../../contants/contants";
+import { COLORS } from "../../../constants/constants";
 import ItemCard from '../../helper/ItemCard'
+import { rooms } from "../../../dataTours/rooms";
 
-export default function ListAccommodation() {
-    const data = tours
-    // console.log(data)
+export default function ListAccommodation({navigation, route}) {
+    // const data = tours
+    const { Title, image,description, price, screenName } = route.params;
     return(
         <View>
             <View style={AccommodationStyle.listItemsView}>
-                <AntDesign name="left" size={24} color={COLORS.WHITE} onPress={() => alert("Going back to the dashboard")}/>
+                <AntDesign name="left" size={20} color={COLORS.WHITE} onPress={() => {
+                    navigation.navigate(screenName,{
+                        Title, image,description, price, screenName
+                    });
+                }}/>
                 <Text style={AccommodationStyle.listHeaderText}>Hotels</Text>
             </View>
             <View style={AccommodationStyle.list}>
@@ -21,9 +25,9 @@ export default function ListAccommodation() {
                 </View> */}
                 <FlatList 
                     style={AccommodationStyle.listItems}
-                    data={data}
+                    data={rooms}
                     renderItem={({item}) => {
-                       return <ItemCard 
+                       return <ItemCard
                        ItemCard={AccommodationStyle.itemCard}
                        touchStyle={AccommodationStyle.touchStyle}
                        url={item.image}
@@ -37,7 +41,7 @@ export default function ListAccommodation() {
                     showsVerticalScrollIndicator={false}
                 />
             </View>
-            <StatusBar barStyle='light-content'/>
+            <StatusBar barStyle='light-content' backgroundColor={COLORS.PRIMARY}/>
         </View>
     )
 }

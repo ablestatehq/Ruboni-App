@@ -1,16 +1,13 @@
 import { StyleSheet } from "react-native";
-import { COLORS } from "../../contants/contants";
+import { COLORS } from "../../../constants/constants";
 
 export const AccommodationStyle = StyleSheet.create({
     // accView.js file styles. below
     aContainer:{
-        // margin:10,
         flex:1,
         alignItems:'center'
     },
     header:{
-        // padding:5,
-        // position: "absolute",
         margin:10,
         height:'30%',
         width:'95%',
@@ -20,6 +17,8 @@ export const AccommodationStyle = StyleSheet.create({
         width:'100%',
         height:'100%',
         borderRadius:10,
+        flex:1,
+        overflow: 'hidden'
     },
     zindexView:{
         width:'90%',
@@ -63,6 +62,16 @@ export const AccommodationStyle = StyleSheet.create({
     btnText:{
         color:COLORS.WHITE,
         textAlign:"center"
+    },
+    rating:{
+        flexDirection:'row',
+        justifyContent:'space-between',
+        width:"100%",
+        padding:10,
+        alignItems:"center"
+    },
+    starRating:{
+        flexDirection:'row',
     },
     accScroll:{
         // borderWidth:1,
@@ -141,7 +150,7 @@ export const AccommodationStyle = StyleSheet.create({
     listItemsView:{
         backgroundColor:COLORS.PRIMARY,
         flexDirection:"row",
-        height:'15%',
+        padding: 10,
         alignItems:"center"
     },
     listHeaderText:{
@@ -153,5 +162,14 @@ export const AccommodationStyle = StyleSheet.create({
     list:{
         flexDirection:'column',
         alignItems:"center"
+    }
+    ,
+    imgStyle:{
+        height:200,
+        width: '100%'
+    },
+    
+    listItems:{
+        width: '90%'
     }
 });

@@ -5,11 +5,11 @@ import {
     StyleSheet
 } from 'react-native';
 import Btn from './Btn';
-import { COLORS } from '../contants/contants';
+import { COLORS } from '../../constants/constants';
 
 
 export default function Dialog({
-    isV,// This is a boolean value
+    isV,// This is a boolean value for checking whether the model should be visible.
     title, // Title for the dialog
     message, // message to be displayed in the dialog
     yesPressed, // callback for the yes button press
@@ -23,7 +23,7 @@ export default function Dialog({
                     <Text style={styles.alertMessage}>{message}</Text>
                     <View style={styles.alertBtnSection}>
                         <Btn BtnStyle={styles.alertBtn} BtnText="Yes" BtnTextStyle={styles.btnText} Onpress={yesPressed}/>
-                        <Btn BtnStyle={styles.alertBtn} BtnText="No" BtnTextStyle={styles.btnText} Onpress={noPressed}/>
+                        <Btn BtnStyle={styles.alertBtn} BtnText="No" BtnTextStyle={styles.btnText} Onpress={noPressed} />
                     </View>
                 </View>
             </View>
@@ -34,44 +34,42 @@ export default function Dialog({
 const styles = StyleSheet.create({
     modalView:{
         flex:1,
-        alignContent:'center',
+        alignItems:'center',
         justifyContent:'center',
-        borderRadius:5,
     },
     alert:{
-        width:'100%',
-        maxWidth:300,
-        margin:48,
+        width:'80%',
         elevation:24,
-        borderRadius:2,
-        backgroundColor:COLORS.PRIMARY_1
+        backgroundColor:COLORS.PRIMARY_1,
+        padding:20
     },
     alertTitle:{
-        margin:24,
+        // margin:24,
         fontWeight:"bold",
-        fontSize:40,
+        fontSize:25,
         color:"#000"
     },
     alertMessage:{
-        marginLeft:24,
-        marginRight:24,
-        marginBottom:24,
+        // marginLeft:24,
+        // marginRight:24,
+        // marginBottom:24,
         fontSize:16,
         color:"#000"
     },
     alertBtnSection:{
+        width:'100%',
         marginTop:0,
         marginRight:0,
-        marginBottom:8,
-        marginLeft:24,
+        // marginBottom:8,
+        // marginLeft:24,
         padding:10,
         flexDirection:'row',
-        justifyContent:'space-between'
+        justifyContent:'space-between',
+
     },
     alertBtn:{
         marginTop:12,
         marginRight:8,
-        width:100
     },
     btnText:{
 

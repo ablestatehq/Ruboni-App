@@ -30,17 +30,17 @@ export async function localCart(obj){
 }
 
 // retrieving data from the localstorage
-export async function getLocalCart(){
+export async function getLocalItem(value){
     // retrieve data from the local storage.
-     return await AsyncStorage.getItem('cartItemList');
+    // cartItemList
+    // accessToken
+     return await AsyncStorage.getItem(value);
 }
 
 // clear the localstorage.
-export async function clearStorage(){
+export function clearStorage(value){
     try {
-        await AsyncStorage.clear(()=>{
-            console.log("storage cleared")
-        })
+        AsyncStorage.removeItem(value);
     } catch (error) {
         
     }

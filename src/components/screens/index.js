@@ -1,4 +1,4 @@
-// All my screens are export from within this file.
+// All my screens are exported from within this file.
 export { default as Login } from './LoginScreen/Login'
 export { default as SignUp } from './SignUpScreen/SignUp'
 export { default as Dashboard } from './Dashboard/Dashboard'
@@ -15,3 +15,6 @@ export { default as Notification } from './Account/Notification'
 export { default as PaymentMethod } from './Account/PaymentMethods'
 export { default as Settings } from './Account/Settings'
 export { default as Memory } from './Account/Memories'
+export { default as Itinerary } from './Trips/itinerary'
+export { default as TripCreation } from './../helper/Tripform'
+export { default as Map } from './Map/map'

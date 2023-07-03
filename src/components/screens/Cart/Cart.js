@@ -8,22 +8,29 @@ import { cartStyle } from "./style"
 import { AntDesign } from "@expo/vector-icons";
 import Item from "./Item";
 import Btn from "../../helper/Btn";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import CartContext from "../../contexts/cart";
 import { COLORS, FONTS } from "../../../constants/constants";
 import { totalCost } from "../../../utils/cartFunctions";
+import appwriteContext from "../../contexts/appwriteContext";
+import Dialog from "../../helper/dialog";
 
 export default function Cart({navigation}){
     let {  cartItems } = useContext(CartContext);
-    
+    const { isLoggedIn } = useContext(appwriteContext)
+    const [ isVisible, setIsVisible ] = useState(false);
+
+    const toggleVisibility = () => {
+        setIsVisible(!isVisible);
+    }
         return(
             <View style={cartStyle.container}>
                 <View style={cartStyle.header}>
-                <AntDesign name="left" style={cartStyle.backBtn} size={32} color="white" onPress={() => navigation.navigate('Dashboard')}/>
+                <AntDesign name="left"  size={25} color={COLORS.BLACK} onPress={() => navigation.navigate('Dashboard')}/>
                     <Text style={{
                         width:'100%', 
                         textAlign:'center', 
-                        color:COLORS.WHITE, 
+                        // color:COLORS.WHITE, 
                         fontSize:FONTS.SIZE.HEADING
                         }}>Cart</Text>
                 </View>
@@ -51,9 +58,16 @@ export default function Cart({navigation}){
                         BtnStyle={{...cartStyle.orderBtn, width:'100%'}} 
                         Onpress={() => {
                             if(totalCost([...cartItems])){
-                                navigation.navigate('Payment',{
-                                    screenName: 'Cart',
-                                });
+                            //   if(isLoggedIn){
+                            //     navigation.navigate('Payment',{
+                            //         screenName: 'Cart',
+                            //     });
+                            //   }else{
+                            //     toggleVisibility()
+                            //   }
+                            navigation.navigate("Payment",{
+                                screenName: 'Cart'
+                            })
                             }else{
                                 alert("go shopping")
                                 navigation.navigate('Dashboard')
@@ -61,8 +75,19 @@ export default function Cart({navigation}){
                         }} 
                         BtnTextStyle={cartStyle.orderBtnText}
                         BtnText="Order" />
+                        <Dialog
+                            isV={isVisible}
+                            title="No account found"
+                            message="Do you want to create a account?"
+                            yesPressed={() => {
+                                toggleVisibility()
+                                navigation.navigate('Login');
+                            }}
+                            noPressed={() => {
+                                toggleVisibility()
+                            }} />
                 </View>
-                <StatusBar barStyle="light-content" />
+                <StatusBar barStyle="dark-content" backgroundColor={COLORS.WHITE} />
             </View>
         )
 }

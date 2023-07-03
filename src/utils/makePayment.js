@@ -1,25 +1,24 @@
-import { FlutterwaveInitV2 } from "flutterwave-react-native";
+export function paymentData({email, amount}){
+    return {
+        public_key: 'YOUR_PUBLIC_KEY',
+        tx_ref: 'YOUR_TRANSACTION_REFERENCE',
+        amount: amount,
+        currency: 'UGX',
+        payment_options: 'card',
+        customer: {
+            email: email,
+        },
+        meta: {
+            consumer_id: '23',
+            consumer_mac: '92a3-912ba-1192a',
+        },
+        callback: (response) => {
+            console.log('Payment response:', response);
 
-export default async function MakePayment(transactionRef, amount, currency){
-    try {
-        // initialize the payment
-        const payment = await FlutterwaveInitV2({
-            txref: transactionRef,
-            PBFPubKey: process.env.TZ, // My flutterwave public key
-            amount: amount,
-            currency: currency,
-            customer_email: 'wasswaenockmale@gmail.com',
-            payment_options: 'card, mobilemoney, ussd',
-
-        });
-
-    usePaymentLink(payment);
-    } catch (error) {
-        console.log(error)
+        },
+        onclose: () => {
+            console.log('Payment closed');
+            // Handle payment closure
+        },
     }
-    
-}
-
-export function generateTransactionRef(num){
-    return "abkclweoeriowioansdfoapwehfifsdfndf".slice(1,num)
 }

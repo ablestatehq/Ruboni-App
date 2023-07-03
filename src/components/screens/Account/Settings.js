@@ -11,8 +11,9 @@ import { settingStyle } from './style';
 import { useContext, useState } from 'react';
 import appwriteContext from '../../contexts/appwriteContext';
 
+
 export default function Settings(props){
-    const { isLoggedIn } = useContext(appwriteContext);
+    const { isLoggedIn, user } = useContext(appwriteContext);
     const [isEnabled, setIsEnabled] = useState(false)
 
 
@@ -23,7 +24,7 @@ export default function Settings(props){
         <View style={settingStyle.container}>
             <View style={settingStyle.settingHeader}>
                 <AntDesign name='left' size={32} color={COLORS.BLACK} onPress={()=>
-                    props.navigation.navigate(isLoggedIn ? 'name' : 'Guest')
+                    props.navigation.navigate(isLoggedIn ? user.firstName : 'Guest')
                 }/>
                 <Text style={settingStyle.settingHT}>Settings</Text>
             </View>
@@ -40,7 +41,7 @@ export default function Settings(props){
                         {/* {console.log(isEnabled)} */}
                 </View>
                 <TouchableOpacity style={settingStyle.clickSettings} onPress={() => alert("Privary settings")}>
-                    <Text>Privacy and Security</Text>
+                    <Text>Privacy</Text>
                     <AntDesign name='right' size={20} color={COLORS.BLACK} />
                 </TouchableOpacity>
 

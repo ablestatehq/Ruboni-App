@@ -2,23 +2,24 @@ import { View, Text, FlatList, StatusBar } from "react-native";
 import { ActivityStyle } from "./style";
 import { tours } from "../../../dataTours/tours";
 import { AntDesign } from "@expo/vector-icons";
-import { COLORS } from "../../contants/contants";
+import { COLORS } from "../../../constants/constants";
 import ItemCard from "../../helper/ItemCard";
 
-export default function Packages() {
+export default function Packages({navigation, route}){
     const data = tours
-    // console.log(data)
+    const { Title, image,description, price, screenName } = route.params;
     return(
         <View>
             <View style={ActivityStyle.listItemsView}>
-                <AntDesign name="left" size={24} color={COLORS.WHITE} onPress={() => alert("Going back to the dashboard")}/>
+                <AntDesign name="left" size={24} color={COLORS.WHITE} onPress={() => {
+                    navigation.navigate(screenName, {
+                        Title, image,description, price, screenName
+                    })
+                }}/>
                 <Text style={ActivityStyle.listHeaderText}>Tour Packages</Text>
             </View>
             <View style={ActivityStyle.list}>
                 {/* Here, list the accommodations available here  */}
-                {/* <View>
-                    User can select the type of room from here.
-                </View> */}
                 <FlatList 
                     style={ActivityStyle.listItems}
                     data={data}
