@@ -19,6 +19,7 @@ export default function TripCreation({navigation, route}){
     const [checkin, setCheckIn] = useState(new Date());
     const [checkout, setCheckout] = useState(new Date());
     const [activities, setActivities ] = useState([{...route.params}])
+    const { Title, image, description, price } = route.params;
     const [ room, setRoom ] = useState([])
 
     const showDate = (currentMode, state) => {
@@ -112,7 +113,11 @@ export default function TripCreation({navigation, route}){
                        <View style={{...styles.list, alignItems:"center", justifyContent:"center"}}>
                         <TouchableOpacity onPress={() => {
                              navigation.navigate('ListActivities', {
-                                screenName: 'TripCreation'
+                                screenName: 'TripCreation',
+                                Title, 
+                                image, 
+                                description, 
+                                price
                             })
                         }}>
                             <Text>Add rooms to your trip</Text>
@@ -142,7 +147,11 @@ export default function TripCreation({navigation, route}){
                     <Text>$200</Text>
                 </View>
 
-                <TouchableOpacity onPress={() => alert("Proceed to payment.")}>
+                <TouchableOpacity onPress={() => {
+                    navigation.navigate("Payment",{
+                        screenName: "TripCreation"
+                    })
+                }}>
                     <Text>Pay 15% to book</Text>
                 </TouchableOpacity>
             </View>

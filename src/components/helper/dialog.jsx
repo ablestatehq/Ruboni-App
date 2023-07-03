@@ -39,8 +39,6 @@ const styles = StyleSheet.create({
     },
     alert:{
         width:'80%',
-        // maxWidth:300,
-        // margin:100,
         elevation:24,
         backgroundColor:COLORS.PRIMARY_1,
         padding:20
