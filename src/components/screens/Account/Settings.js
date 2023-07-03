@@ -41,7 +41,7 @@ export default function Settings(props){
                         {/* {console.log(isEnabled)} */}
                 </View>
                 <TouchableOpacity style={settingStyle.clickSettings} onPress={() => alert("Privary settings")}>
-                    <Text>Change payment methods</Text>
+                    <Text>Privacy</Text>
                     <AntDesign name='right' size={20} color={COLORS.BLACK} />
                 </TouchableOpacity>
 
