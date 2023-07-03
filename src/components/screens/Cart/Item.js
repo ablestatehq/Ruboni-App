@@ -20,7 +20,7 @@ const Item = ({cost, url,name}) =>{
             <Image source={url} style={cartStyle.itemImg}/>
             <View style={cartStyle.leftSide}>
                 <View style={cartStyle.increase}>
-                    <AntDesign name="plus" size={24} color={COLORS.WHITE} style={{backgroundColor:COLORS.PRIMARY}} onPress={() => {
+                    <AntDesign name="plus" size={24} color={COLORS.BLACK} style={{alignItems: 'center', borderWidth:1, borderRadius: 5, borderColor: COLORS.PRIMARY}} onPress={() => {
                         let value = count + 1;
                         setCount(value);
                         // Looking for the item in the cartItems and change it's quantity
@@ -37,7 +37,7 @@ const Item = ({cost, url,name}) =>{
                         localCart(arr);
                     }}/>
                     <Text style={{width:40, textAlign:"center"}}>{count}</Text>
-                    <AntDesign name="minus" disabled={isable} size={24} color={COLORS.WHITE} style={{backgroundColor:COLORS.PRIMARY}} onPress={() => {
+                    <AntDesign name="minus" disabled={isable} size={24} color={COLORS.BLACK} style={{alignItems: 'center', borderWidth:1, borderRadius: 5, borderColor: COLORS.PRIMARY}} onPress={() => {
                         if(count < 2){
                             // alert('One can\'t be reduced, you can decide to remove the item if you don\'t wnt it.')
                             setIsable(true);
@@ -61,7 +61,7 @@ const Item = ({cost, url,name}) =>{
                 <View>
                     <Text>T.Cost: {`$${Number(cost.slice(1)) * count}`}</Text>
                 </View>
-                <Btn BtnText="Remove" BtnStyle={cartStyle.btn} Onpress={() => {
+                <Btn BtnText="Remove"  Onpress={() => {
                     // Remove the item from the cartItems,
                     const arr = [...cartItems];
                     let index;
@@ -81,7 +81,9 @@ const Item = ({cost, url,name}) =>{
                     }
 
                 }} 
-                BtnTextStyle={cartStyle.btnText} />
+                // BtnTextStyle={cartStyle.btnText}
+                BtnStyle={{alignItems: 'center', borderWidth:1, borderRadius: 5, borderColor: COLORS.PRIMARY}}
+                 />
             </View>
         </View>
     )

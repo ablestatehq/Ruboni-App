@@ -7,7 +7,7 @@ export const cartStyle = StyleSheet.create({
         width:'100%',
         backgroundColor: COLORS.WHITE,
         height:150,
-        borderColor:'green',
+        // borderColor:'green',
         flexDirection:"row",
         justifyContent:'space-between',
         alignItems:"center",
@@ -53,7 +53,7 @@ export const cartStyle = StyleSheet.create({
     },
 
     header:{
-        backgroundColor:COLORS.PRIMARY,
+        backgroundColor:COLORS.WHITE,
         flexDirection:'row',
         alignItems:'center',
         padding:5
